@@ -7,6 +7,8 @@ enum State { FREE_FLY, POSSESSING }
 @export var player_id: int = 1
 @export var fly_speed: float = 6.0
 @export var rotate_speed: float = 2.0
+@export var translate_speed: float = 3.0
+
 
 var state: State = State.FREE_FLY
 var possessed_fragment: Node3D = null
@@ -34,10 +36,17 @@ func _process_possessing(delta: float) -> void:
 	if input_provider.is_possess_just_pressed():
 		_release_possession()
 		return
-	var axis_input := input_provider.get_axis_input()
+
+	var rotate_input := input_provider.get_rotate_input()
 	match player_id:
-		1: possessed_fragment.rotate_x(axis_input * rotate_speed * delta)
-		2: possessed_fragment.rotate_z(axis_input * rotate_speed * delta)
+		1: possessed_fragment.rotate_x(rotate_input * rotate_speed * delta)
+		2: possessed_fragment.rotate_z(rotate_input * rotate_speed * delta)
+
+	if possessed_fragment.can_translate:
+		var translate_input := input_provider.get_translate_input()
+		var axis_index := 0 if player_id == 1 else 2
+		possessed_fragment.translate_on_axis(axis_index, translate_input * translate_speed * delta)
+
 
 func _try_possess(fragment: Node3D) -> void:
 	var fragment_id := str(fragment.get_path())
@@ -45,12 +54,12 @@ func _try_possess(fragment: Node3D) -> void:
 		possessed_fragment = fragment
 		state = State.POSSESSING
 		visible = false
-		set_physics_process(true)
 
 func _release_possession() -> void:
 	if possessed_fragment == null:
 		return
 	PossessionManager.release(str(possessed_fragment.get_path()))
+	global_position = possessed_fragment.global_position
 	possessed_fragment = null
 	state = State.FREE_FLY
 	visible = true

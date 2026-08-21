@@ -34,4 +34,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.866802, 5.110819, 26.967548
 player_id = 2
 
 [node name="FragmentPlaceHolder" parent="." unique_id=927148887 instance=ExtResource("2_3wv3p")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.9987898, 22.394978)
+transform = Transform3D(2, 0, 0, 0, 0.06519413, -1.9989371, 0, 1.9989371, 0.06519413, 0, 2.9987898, 22.394978)
+can_translate = true
+translate_range = 10.0

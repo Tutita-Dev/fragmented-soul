@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://jj025m0hty0d"]
 
+[ext_resource type="Script" uid="uid://72v21iu42es2" path="res://scripts/mirror/fragment.gd" id="1_n7wok"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uakvs"]
 albedo_color = Color(1, 0.5058824, 1, 1)
 
@@ -9,6 +11,7 @@ material = SubResource("StandardMaterial3D_uakvs")
 [sub_resource type="BoxShape3D" id="BoxShape3D_uakvs"]
 
 [node name="FragmentPlaceHolder" type="Node3D" unique_id=927148887]
+script = ExtResource("1_n7wok")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1100412050]
 mesh = SubResource("BoxMesh_uakvs")

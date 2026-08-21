@@ -18,3 +18,14 @@ func get_axis_input() -> float:
 
 func is_possess_just_pressed() -> bool:
 	return Input.is_action_just_pressed("p%d_possess" % player_id)
+
+func get_rotate_input() -> float:
+	var prefix := "p%d_" % player_id
+	return Input.get_action_strength(prefix + "up") - Input.get_action_strength(prefix + "down")
+
+func get_translate_input() -> float:
+	var prefix := "p%d_" % player_id
+	if player_id == 1:
+		return Input.get_action_strength(prefix + "right") - Input.get_action_strength(prefix + "left")
+	else:
+		return Input.get_action_strength(prefix + "forward") - Input.get_action_strength(prefix + "back")
