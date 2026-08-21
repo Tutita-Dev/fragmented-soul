@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://kfxiyyxr357b"]
+
+[ext_resource type="Script" uid="uid://c22qsdclwrm7w" path="res://scripts/player/player.gd" id="1_wr5hl"]
+[ext_resource type="Script" uid="uid://ddc6cwvq7mpma" path="res://scripts/player/input_provider.gd" id="2_gfjak"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_o8nba"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4kuee"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gfjak"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1552124901]
+script = ExtResource("1_wr5hl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1731519691]
+mesh = SubResource("SphereMesh_o8nba")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1072886431]
+shape = SubResource("SphereShape3D_4kuee")
+
+[node name="PossessionArea" type="Area3D" parent="." unique_id=1325094697]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PossessionArea" unique_id=2018877108]
+shape = SubResource("SphereShape3D_gfjak")
+
+[node name="InputProvider" type="Node" parent="PossessionArea" unique_id=1064551349]
+script = ExtResource("2_gfjak")
+metadata/_custom_type_script = "uid://ddc6cwvq7mpma"
+
+[connection signal="area_entered" from="PossessionArea" to="." method="_on_possession_area_area_entered"]
+[connection signal="area_exited" from="PossessionArea" to="." method="_on_possession_area_area_exited"]

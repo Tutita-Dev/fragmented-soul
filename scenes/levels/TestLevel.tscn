@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://ck14nyfg6wijg"]
+
+[ext_resource type="PackedScene" uid="uid://kfxiyyxr357b" path="res://scenes/player/Player.tscn" id="1_w20ko"]
+[ext_resource type="PackedScene" uid="uid://jj025m0hty0d" path="res://scenes/fragments/FragmentPlaceHolder.tscn" id="2_3wv3p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_deaoh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_86d4f"]
+
+[node name="TestLevel" type="Node3D" unique_id=1316197581]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1963615781]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1579462688]
+transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, 0, 0)
+shape = SubResource("BoxShape3D_deaoh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=134763372]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_86d4f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1545155902]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 28.438509, 14.160107)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=954987854]
+transform = Transform3D(1, 0, 0, 0, 0.840784, 0.5413708, 0, -0.5413708, 0.840784, 0, 16.497387, 46.821404)
+
+[node name="Player" parent="." unique_id=1552124901 instance=ExtResource("1_w20ko")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -11.932255, 1.0568905, 23.944695)
+
+[node name="Player2" parent="." unique_id=626304499 instance=ExtResource("1_w20ko")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.866802, 5.110819, 26.967548)
+player_id = 2
+
+[node name="FragmentPlaceHolder" parent="." unique_id=927148887 instance=ExtResource("2_3wv3p")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.9987898, 22.394978)
