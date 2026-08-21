@@ -14,6 +14,11 @@ config/name="fragmented-soul"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*uid://bm0wgjs2dsi07"
+PossessionManager="*uid://dysmnecm3jv84"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
