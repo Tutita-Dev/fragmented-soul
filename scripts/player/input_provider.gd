@@ -4,36 +4,51 @@ extends Node
 
 var player_id: int = 1
 
-func get_move_vector() -> Vector3:
+var _actions: Dictionary = {}
+
+func _ready() -> void:
+	_build_actions()
+
+func _build_actions() -> void:
 	var prefix := "p%d_" % player_id
+	_actions = {
+		"forward": prefix + "forward",
+		"back": prefix + "back",
+		"left": prefix + "left",
+		"right": prefix + "right",
+		"up": prefix + "up",
+		"down": prefix + "down",
+		"possess": prefix + "possess",
+	}
+
+func get_move_vector() -> Vector3:
 	var dir := Vector3.ZERO
-	dir.x = Input.get_action_strength(prefix + "right") - Input.get_action_strength(prefix + "left")
-	dir.y = Input.get_action_strength(prefix + "up") - Input.get_action_strength(prefix + "down")
-	dir.z = Input.get_action_strength(prefix + "back") - Input.get_action_strength(prefix + "forward")
+	dir.x = Input.get_action_strength(_actions.right) - Input.get_action_strength(_actions.left)
+	dir.y = Input.get_action_strength(_actions.up) - Input.get_action_strength(_actions.down)
+	dir.z = Input.get_action_strength(_actions.back) - Input.get_action_strength(_actions.forward)
 	return dir if dir.length() <= 1.0 else dir.normalized()
 
 func get_axis_input() -> float:
-	var prefix := "p%d_" % player_id
-	return Input.get_action_strength(prefix + "right") - Input.get_action_strength(prefix + "left")
+	return Input.get_action_strength(_actions.right) - Input.get_action_strength(_actions.left)
 
 func is_possess_just_pressed() -> bool:
-	return Input.is_action_just_pressed("p%d_possess" % player_id)
+	return Input.is_action_just_pressed(_actions.possess)
 
 func get_rotate_input() -> float:
-	var prefix := "p%d_" % player_id
-	return Input.get_action_strength(prefix + "up") - Input.get_action_strength(prefix + "down")
+	return Input.get_action_strength(_actions.up) - Input.get_action_strength(_actions.down)
 
 func get_translate_input() -> float:
-	var prefix := "p%d_" % player_id
 	if player_id == 1:
-		return Input.get_action_strength(prefix + "right") - Input.get_action_strength(prefix + "left")
+		return Input.get_action_strength(_actions.right) - Input.get_action_strength(_actions.left)
 	else:
-		return Input.get_action_strength(prefix + "forward") - Input.get_action_strength(prefix + "back")
+		return Input.get_action_strength(_actions.forward) - Input.get_action_strength(_actions.back)
 
 func get_forward_input() -> float:
-	var prefix := "p%d_" % player_id
-	return Input.get_action_strength(prefix + "forward") - Input.get_action_strength(prefix + "back")
+	return Input.get_action_strength(_actions.forward) - Input.get_action_strength(_actions.back)
 
 func get_vertical_input() -> float:
-	var prefix := "p%d_" % player_id
-	return Input.get_action_strength(prefix + "up") - Input.get_action_strength(prefix + "down")
+	return Input.get_action_strength(_actions.up) - Input.get_action_strength(_actions.down)
+	
+func set_player_id(id: int) -> void:
+	player_id = id
+	_build_actions()

@@ -19,7 +19,7 @@ var nearby_fragment: Node3D = null
 @onready var input_provider: InputProvider = $PossessionArea/InputProvider
 
 func _ready() -> void:
-	input_provider.player_id = player_id
+	input_provider.set_player_id(player_id)
 
 func _physics_process(delta: float) -> void:
 	match state:
