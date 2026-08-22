@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b31w2vtbcqare"]
+
+[ext_resource type="Script" uid="uid://1owjwknpcqa7" path="res://scripts/light/light_receptor.gd" id="1_hfuq8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_na311"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_j3dwy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_npto3"]
+
+[node name="LightReceptor" type="StaticBody3D" unique_id=879324380]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_hfuq8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=153029965]
+material_override = SubResource("StandardMaterial3D_na311")
+mesh = SubResource("SphereMesh_j3dwy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1055492648]
+shape = SubResource("SphereShape3D_npto3")
