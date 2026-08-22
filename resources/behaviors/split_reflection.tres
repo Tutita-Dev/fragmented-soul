@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SplitReflection" format=3 uid="uid://dov63wi0ljeok"]
+
+[ext_resource type="Script" uid="uid://bgmowie40fjc" path="res://scripts/mirror/behaviors/split_reflection.gd" id="1_wdr5v"]
+
+[resource]
+script = ExtResource("1_wdr5v")
+metadata/_custom_type_script = "uid://bgmowie40fjc"

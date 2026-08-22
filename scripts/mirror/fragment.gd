@@ -4,6 +4,7 @@ extends Node3D
 
 @export var can_translate: bool = false
 @export var translate_range: float = 2.0
+@export var behavior: ReflectionBehavior
 
 var origin_position: Vector3
 

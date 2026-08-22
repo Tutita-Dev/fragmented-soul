@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="VariableAngleReflection" format=3 uid="uid://cp7uhhp7kep31"]
+
+[ext_resource type="Script" uid="uid://2m0aacxqjvxr" path="res://scripts/mirror/behaviors/variable_angle_reflection.gd" id="1_nuyla"]
+
+[resource]
+script = ExtResource("1_nuyla")
+metadata/_custom_type_script = "uid://2m0aacxqjvxr"

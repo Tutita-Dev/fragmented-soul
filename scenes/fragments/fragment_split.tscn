@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://blo0s5qhhi6eh"]
+
+[ext_resource type="PackedScene" uid="uid://jj025m0hty0d" path="res://scenes/fragments/FragmentBase.tscn" id="1_3fm2y"]
+[ext_resource type="Resource" uid="uid://dov63wi0ljeok" path="res://resources/behaviors/split_reflection.tres" id="2_d4n7v"]
+
+[node name="FragmentBase" unique_id=500132480 instance=ExtResource("1_3fm2y")]
+behavior = ExtResource("2_d4n7v")

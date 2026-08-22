@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://jj025m0hty0d"]
+
+[ext_resource type="Script" uid="uid://72v21iu42es2" path="res://scripts/mirror/fragment.gd" id="1_n7wok"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uakvs"]
+albedo_color = Color(1, 0.5058824, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uakvs"]
+material = SubResource("StandardMaterial3D_uakvs")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n7wok"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uakvs"]
+
+[node name="FragmentBase" type="StaticBody3D" unique_id=500132480]
+collision_layer = 2
+script = ExtResource("1_n7wok")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1100412050]
+mesh = SubResource("BoxMesh_uakvs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=502111714]
+shape = SubResource("ConcavePolygonShape3D_n7wok")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1553229167 groups=["possessable"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=610309864]
+shape = SubResource("BoxShape3D_uakvs")

@@ -2,6 +2,5 @@
 class_name SimpleReflection
 extends ReflectionBehavior
 
-func reflect(incoming_dir: Vector3, normal: Vector3) -> Array:
-	var reflected := incoming_dir.bounce(normal)
-	return [reflected]
+func reflect(incoming_dir: Vector3, normal: Vector3) -> Vector3:
+	return incoming_dir.bounce(normal) # reflexión especular estándar

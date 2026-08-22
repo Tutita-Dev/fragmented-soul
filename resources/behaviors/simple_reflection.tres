@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SimpleReflection" format=3 uid="uid://pbp57yjmghdq"]
+
+[ext_resource type="Script" uid="uid://ce63sh8hg4ps" path="res://scripts/mirror/behaviors/simple_reflection.gd" id="1_wbmxp"]
+
+[resource]
+script = ExtResource("1_wbmxp")
+metadata/_custom_type_script = "uid://ce63sh8hg4ps"
