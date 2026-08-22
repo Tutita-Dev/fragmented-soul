@@ -29,3 +29,11 @@ func get_translate_input() -> float:
 		return Input.get_action_strength(prefix + "right") - Input.get_action_strength(prefix + "left")
 	else:
 		return Input.get_action_strength(prefix + "forward") - Input.get_action_strength(prefix + "back")
+
+func get_forward_input() -> float:
+	var prefix := "p%d_" % player_id
+	return Input.get_action_strength(prefix + "forward") - Input.get_action_strength(prefix + "back")
+
+func get_vertical_input() -> float:
+	var prefix := "p%d_" % player_id
+	return Input.get_action_strength(prefix + "up") - Input.get_action_strength(prefix + "down")

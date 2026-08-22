@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dw5s48w6se2m5"]
+
+[ext_resource type="Script" uid="uid://k2sg7uinh4hb" path="res://scenes/player/camera_follow.gd" id="1_iurfe"]
+[ext_resource type="Script" uid="uid://cp581yb1ymw1y" path="res://scenes/player/camera_ring.gd" id="1_ndgra"]
+
+[node name="CameraRing" type="Node" unique_id=171515326]
+script = ExtResource("1_ndgra")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1391508480]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.9943297)
+theme_override_constants/separation = 0
+
+[node name="SubViewportContainerP1" type="SubViewportContainer" parent="HBoxContainer" unique_id=450359268]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainerP1" unique_id=37471881]
+handle_input_locally = false
+size = Vector2i(576, 648)
+render_target_update_mode = 4
+
+[node name="SpringArm3D" type="SpringArm3D" parent="HBoxContainer/SubViewportContainerP1/SubViewport" unique_id=120088350]
+spring_length = 4.0
+script = ExtResource("1_iurfe")
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/SubViewportContainerP1/SubViewport/SpringArm3D" unique_id=1587257724]
+current = true
+
+[node name="SubViewportContainerP2" type="SubViewportContainer" parent="HBoxContainer" unique_id=596105307]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainerP2" unique_id=1602169457]
+handle_input_locally = false
+size = Vector2i(576, 648)
+render_target_update_mode = 4
+
+[node name="SpringArm3D" type="SpringArm3D" parent="HBoxContainer/SubViewportContainerP2/SubViewport" unique_id=2086343932]
+spring_length = 4.0
+script = ExtResource("1_iurfe")
+
+[node name="Camera3D" type="Camera3D" parent="HBoxContainer/SubViewportContainerP2/SubViewport/SpringArm3D" unique_id=623934246]
+current = true

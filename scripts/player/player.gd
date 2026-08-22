@@ -5,6 +5,8 @@ extends CharacterBody3D
 enum State { FREE_FLY, POSSESSING }
 
 @export var player_id: int = 1
+@export var turn_speed: float = 2.5  # rad/s
+
 @export var fly_speed: float = 6.0
 @export var rotate_speed: float = 2.0
 @export var translate_speed: float = 3.0
@@ -27,8 +29,18 @@ func _physics_process(delta: float) -> void:
 			_process_possessing(delta)
 
 func _process_free_fly() -> void:
-	velocity = input_provider.get_move_vector() * fly_speed
+	var turn_input := input_provider.get_axis_input()
+	rotate_y(-turn_input * turn_speed * get_physics_process_delta_time())
+
+	var forward_input := input_provider.get_forward_input()
+	var vertical_input := input_provider.get_vertical_input()
+
+	var move_dir := -global_transform.basis.z * forward_input
+	move_dir.y = vertical_input
+
+	velocity = move_dir * fly_speed
 	move_and_slide()
+
 	if input_provider.is_possess_just_pressed() and nearby_fragment:
 		_try_possess(nearby_fragment)
 
@@ -50,19 +62,23 @@ func _process_possessing(delta: float) -> void:
 
 func _try_possess(fragment: Node3D) -> void:
 	var fragment_id := str(fragment.get_path())
+	possessed_fragment = fragment
+	state = State.POSSESSING
 	if PossessionManager.try_possess(fragment_id, player_id):
-		possessed_fragment = fragment
-		state = State.POSSESSING
 		visible = false
+	else:
+		possessed_fragment = null
+		state = State.FREE_FLY
 
 func _release_possession() -> void:
 	if possessed_fragment == null:
 		return
-	PossessionManager.release(str(possessed_fragment.get_path()))
+	var fragment_id := str(possessed_fragment.get_path())
 	global_position = possessed_fragment.global_position
 	possessed_fragment = null
 	state = State.FREE_FLY
 	visible = true
+	PossessionManager.release(fragment_id)
 
 func _on_possession_area_area_entered(area: Area3D) -> void:
 	if area.is_in_group("possessable"):
@@ -71,3 +87,8 @@ func _on_possession_area_area_entered(area: Area3D) -> void:
 func _on_possession_area_area_exited(area: Area3D) -> void:
 	if area.is_in_group("possessable") and area.get_parent() == nearby_fragment:
 		nearby_fragment = null
+
+func get_camera_target() -> Node3D:
+	if state == State.POSSESSING and possessed_fragment:
+		return possessed_fragment
+	return self
