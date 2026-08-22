@@ -5,6 +5,6 @@ extends Resource
 ## Recibe la dirección entrante y la normal de colisión real.
 ## Devuelve un Array[Vector3] de direcciones salientes 
 ## (1 elemento en Simple/VariableAngle, 2 en Split).
-func reflect(incoming_dir: Vector3, normal: Vector3) -> Vector3:
-	return incoming_dir.bounce(normal) # fallback, las subclases sobreescriben
-	
+func reflect_multi(_dir: Vector3, _normal: Vector3) -> Array[Vector3]:
+	push_error("reflect_multi no implementado en behavior base")
+	return []
