@@ -3,9 +3,17 @@ extends Node3D
 
 const FRAGMENT_MASK := 2  # bit de Layer 2 (fragmentos + receptor)
 const MAX_BOUNCES := 8
-const MAX_RAY_DISTANCE := 100.0
+const MAX_RAY_DISTANCE := 100.0  # alcance real del raycast, no tocar por escala de nivel
 
 @export var emitter: Node3D  # asignar en el inspector, el nodo del light_emitter
+
+# Largo VISUAL de un rayo que no choca con nada. Deliberadamente chico y
+# desacoplado de MAX_RAY_DISTANCE (que sigue siendo 100 para la detección
+# real). Un segmento largo, visto desde una cámara muy cerca de su origen
+# y casi alineada con su dirección, siempre se va a ver como una cuña por
+# perspectiva pura — no hay largo "correcto" universal, así que se ajusta
+# chico para esta escala de nivel. Tunear por nivel si hace falta.
+@export var miss_beam_length: float = 2.0
 
 var beam_pool: Array[MeshInstance3D] = []
 var _needs_retrace := true
@@ -50,7 +58,7 @@ func _trace_recursive(origin: Vector3, direction: Vector3, bounce_count: int, wo
 	var result := space_state.intersect_ray(query)
 
 	if result.is_empty():
-		out_segments.append({"from": origin, "to": origin + direction.normalized() * MAX_RAY_DISTANCE})
+		out_segments.append({"from": origin, "to": origin + direction.normalized() * miss_beam_length})
 		return
 
 	out_segments.append({"from": origin, "to": result.position})
@@ -76,7 +84,11 @@ func _trace_recursive(origin: Vector3, direction: Vector3, bounce_count: int, wo
 func _render_beams(segments: Array[Dictionary]) -> void:
 	while beam_pool.size() < segments.size():
 		var mesh := MeshInstance3D.new()
-		mesh.mesh = CylinderMesh.new()
+		var cyl := CylinderMesh.new()
+		cyl.top_radius = 0.05  # grosor placeholder; reemplazar en B8 con arte/shader real
+		cyl.bottom_radius = 0.05
+		cyl.height = 2.0
+		mesh.mesh = cyl
 		add_child(mesh)
 		beam_pool.append(mesh)
 
@@ -95,7 +107,18 @@ func _position_beam_between(beam: MeshInstance3D, from: Vector3, to: Vector3) ->
 	if dist < 0.001:
 		beam.visible = false
 		return
+	var dir := (to - from) / dist  # normalizado, dist ya calculado arriba
+
+	# look_at() queda indeterminado (transform degenerado -> mesh deformado/
+	# gigante) cuando la dirección del beam es casi paralela al vector "up"
+	# que se le pasa. Con rayos que rebotan casi verticales (normal de un
+	# fragmento apuntando hacia arriba, por ejemplo) esto pasa seguido.
+	# Fallback: si dir está casi alineada con UP, usar RIGHT como referencia.
+	var up_ref := Vector3.UP
+	if absf(dir.dot(Vector3.UP)) > 0.99:
+		up_ref = Vector3.RIGHT
+
 	beam.global_position = mid
-	beam.look_at(to, Vector3.UP)
+	beam.look_at(to, up_ref)
 	beam.rotate_object_local(Vector3.RIGHT, PI / 2.0)
 	beam.scale.y = dist / 2.0

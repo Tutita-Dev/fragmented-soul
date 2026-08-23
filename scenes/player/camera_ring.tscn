@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dw5s48w6se2m5"]
 
 [ext_resource type="Script" uid="uid://k2sg7uinh4hb" path="res://scripts/player/camera_follow.gd" id="1_iurfe"]
-[ext_resource type="Script" uid="uid://cp581yb1ymw1y" path="res://scripts/player/camera_ring.gd" id="1_ndgra"]
+[ext_resource type="Script" uid="uid://cp581yb1ymw1y" path="res://scripts/player/camera_rig.gd" id="1_ndgra"]
 
-[node name="CameraRing" type="Node" unique_id=171515326]
+[node name="CameraRig" type="Node" unique_id=171515326]
 script = ExtResource("1_ndgra")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1391508480]
