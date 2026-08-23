@@ -84,6 +84,18 @@ func _render_beams(segments: Array[Dictionary]) -> void:
 		cyl.top_radius = 0.05  # grosor placeholder; reemplazar en B8 con arte/shader real
 		cyl.bottom_radius = 0.05
 		cyl.height = 2.0
+		
+		# --- NUEVO: Material Emisivo ---
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color.CYAN # El color base (ej: cian como en tu imagen)
+		mat.emission_enabled = true
+		mat.emission = Color.CYAN # El color de la luz que emite
+		mat.emission_energy_multiplier = 4.0 # Qué tan fuerte brilla (ajustá a gusto)
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED # Para que no le afecten las sombras
+		
+		cyl.material = mat
+		# -------------------------------
+		
 		mesh.mesh = cyl
 		add_child(mesh)
 		beam_pool.append(mesh)
@@ -91,8 +103,21 @@ func _render_beams(segments: Array[Dictionary]) -> void:
 	for i in segments.size():
 		var seg = segments[i]
 		var beam = beam_pool[i]
+		var light = _get_or_create_beam_light(i) # <-- Traemos la luz del pool
+		
 		beam.visible = true
-		_position_beam_between(beam, seg["from"], seg["to"])
+		light.visible = true # <-- Encendemos la luz
+		
+		# Pasamos tanto la malla como la luz a la función de posicionamiento
+		_position_beam_between(beam, light, seg["from"], seg["to"])
+
+	# Ocultamos las mallas sobrantes
+	for i in range(segments.size(), beam_pool.size()):
+		beam_pool[i].visible = false
+		
+	# <-- NUEVO: Ocultamos las luces sobrantes
+	for i in range(segments.size(), beam_light_pool.size()):
+		beam_light_pool[i].visible = false
 
 	for i in range(segments.size(), beam_pool.size()):
 		beam_pool[i].visible = false
@@ -109,11 +134,13 @@ func _get_or_create_beam_light(index: int) -> OmniLight3D:
 	return beam_light_pool[index]
 	
 
-func _position_beam_between(beam: MeshInstance3D, from: Vector3, to: Vector3) -> void:
+# Se agrega el parámetro 'light' a la firma
+func _position_beam_between(beam: MeshInstance3D, light: OmniLight3D, from: Vector3, to: Vector3) -> void:
 	var mid := (from + to) / 2.0
 	var dist := from.distance_to(to)
 	if dist < 0.001:
 		beam.visible = false
+		light.visible = false # <-- Apagamos la luz también por si acaso
 		return
 	var dir := (to - from) / dist  
 
@@ -121,9 +148,16 @@ func _position_beam_between(beam: MeshInstance3D, from: Vector3, to: Vector3) ->
 	if absf(dir.dot(Vector3.UP)) > 0.99:
 		up_ref = Vector3.RIGHT
 		
+	# --- INICIO DE LÓGICA DE MALLA (Fix B5 Intacto) ---
 	beam.scale = Vector3.ONE
 
 	beam.global_position = mid
 	beam.look_at(to, up_ref)
 	beam.rotate_object_local(Vector3.RIGHT, PI / 2.0)
 	beam.scale.y = dist / 2.0
+	# --- FIN DE LÓGICA DE MALLA ---
+	
+	# --- INICIO DE LÓGICA DE LUZ (B8.6) ---
+	light.global_position = to
+	# Opcional si querés que la luz ilumine un poco más a lo largo en tramos largos:
+	light.omni_range = 1.5
