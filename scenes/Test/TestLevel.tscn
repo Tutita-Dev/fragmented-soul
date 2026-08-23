@@ -50,7 +50,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.25301, 1.3607979, 25.36389
 player_id = 2
 
 [node name="FragmentBase2" parent="." unique_id=1526138773 instance=ExtResource("3_wd06p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.819918, 1.5, -8.996239)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.669914, 1.5, -56.32657)
 can_translate = true
 
 [node name="LightEmitter" parent="." unique_id=1122609926 instance=ExtResource("4_n4ulk")]

@@ -7,13 +7,8 @@ const MAX_RAY_DISTANCE := 100.0  # alcance real del raycast, no tocar por escala
 
 @export var emitter: Node3D  # asignar en el inspector, el nodo del light_emitter
 
-# Largo VISUAL de un rayo que no choca con nada. Deliberadamente chico y
-# desacoplado de MAX_RAY_DISTANCE (que sigue siendo 100 para la detección
-# real). Un segmento largo, visto desde una cámara muy cerca de su origen
-# y casi alineada con su dirección, siempre se va a ver como una cuña por
-# perspectiva pura — no hay largo "correcto" universal, así que se ajusta
-# chico para esta escala de nivel. Tunear por nivel si hace falta.
-@export var miss_beam_length: float = 2.0
+
+@export var miss_beam_length: float = 100
 
 var beam_pool: Array[MeshInstance3D] = []
 var _needs_retrace := true
@@ -107,16 +102,13 @@ func _position_beam_between(beam: MeshInstance3D, from: Vector3, to: Vector3) ->
 	if dist < 0.001:
 		beam.visible = false
 		return
-	var dir := (to - from) / dist  # normalizado, dist ya calculado arriba
+	var dir := (to - from) / dist  
 
-	# look_at() queda indeterminado (transform degenerado -> mesh deformado/
-	# gigante) cuando la dirección del beam es casi paralela al vector "up"
-	# que se le pasa. Con rayos que rebotan casi verticales (normal de un
-	# fragmento apuntando hacia arriba, por ejemplo) esto pasa seguido.
-	# Fallback: si dir está casi alineada con UP, usar RIGHT como referencia.
 	var up_ref := Vector3.UP
 	if absf(dir.dot(Vector3.UP)) > 0.99:
 		up_ref = Vector3.RIGHT
+		
+	beam.scale = Vector3.ONE
 
 	beam.global_position = mid
 	beam.look_at(to, up_ref)
