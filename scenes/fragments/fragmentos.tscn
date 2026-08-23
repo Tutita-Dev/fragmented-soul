@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://0y6vhepgutjy"]
 
-[ext_resource type="PackedScene" uid="uid://do5udrhl7s4g1" path="res://assets/fragmentos.glb" id="1_e5e3k"]
-[ext_resource type="Material" uid="uid://rvfa04olwj84" path="res://fragment.tres" id="2_j4xdx"]
+[ext_resource type="PackedScene" uid="uid://do5udrhl7s4g1" path="res://assets/fragmentos.glb" id="1_a7uvl"]
+[ext_resource type="Material" uid="uid://rvfa04olwj84" path="res://resources/Materials/fragment.tres" id="2_u0p2h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lu8p4"]
 resource_name = "M_Crystal_Fragment"
@@ -40,36 +40,36 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_78ym7")
 
-[node name="fragmentos" unique_id=349959116 instance=ExtResource("1_e5e3k")]
+[node name="fragmentos" unique_id=349959116 instance=ExtResource("1_a7uvl")]
 
-[node name="Crystal_Fragment_01" parent="." index="0" unique_id=1496627694]
+[node name="Crystal_Fragment_01" parent="." index="0" unique_id=38072335]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17975986, 0, 0)
 mesh = SubResource("ArrayMesh_e5e3k")
-surface_material_override/0 = ExtResource("2_j4xdx")
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_02" parent="." index="1" unique_id=1801782478]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_02" parent="." index="1" unique_id=1554630129]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_03" parent="." index="2" unique_id=205332441]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_03" parent="." index="2" unique_id=2052814706]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_04" parent="." index="3" unique_id=2139810180]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_04" parent="." index="3" unique_id=2040432876]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_05" parent="." index="4" unique_id=1569218976]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_05" parent="." index="4" unique_id=623313740]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_06" parent="." index="5" unique_id=1602544853]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_06" parent="." index="5" unique_id=266408003]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_07" parent="." index="6" unique_id=5225016]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_07" parent="." index="6" unique_id=480901991]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_08" parent="." index="7" unique_id=371742497]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_08" parent="." index="7" unique_id=118409234]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_09" parent="." index="8" unique_id=1537164068]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_09" parent="." index="8" unique_id=531316911]
+surface_material_override/0 = ExtResource("2_u0p2h")
 
-[node name="Crystal_Fragment_10" parent="." index="9" unique_id=569252390]
-surface_material_override/0 = ExtResource("2_j4xdx")
+[node name="Crystal_Fragment_10" parent="." index="9" unique_id=1983392232]
+surface_material_override/0 = ExtResource("2_u0p2h")

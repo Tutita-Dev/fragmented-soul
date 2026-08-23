@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://ck14nyfg6wijg"]
 
-[ext_resource type="PackedScene" uid="uid://dw5s48w6se2m5" path="res://scenes/player/camera_ring.tscn" id="1_d0qxw"]
+[ext_resource type="PackedScene" uid="uid://dw5s48w6se2m5" path="res://scenes/player/camera_rig.tscn" id="1_d0qxw"]
 [ext_resource type="Script" uid="uid://cxb6fkpexdcnv" path="res://scripts/levels/test_level.gd" id="1_wd06p"]
 [ext_resource type="PackedScene" uid="uid://kfxiyyxr357b" path="res://scenes/player/Player.tscn" id="2_n4ulk"]
 [ext_resource type="PackedScene" uid="uid://dl4h0qegu136" path="res://scenes/fragments/fragment_simple.tscn" id="3_wd06p"]
 [ext_resource type="PackedScene" uid="uid://dskbadhsqnk4u" path="res://scenes/light_emitter/light_emitter.tscn" id="4_n4ulk"]
 [ext_resource type="PackedScene" uid="uid://b31w2vtbcqare" path="res://scenes/light_receptor/light_receptor.tscn" id="5_wd06p"]
 [ext_resource type="Script" uid="uid://bws61gquuks0d" path="res://scripts/light/light_system.gd" id="6_3e3ua"]
-[ext_resource type="PackedScene" uid="uid://carsknw702ptu" path="res://scenes/player/remap_menu.tscn" id="8_3e3ua"]
+[ext_resource type="PackedScene" uid="uid://carsknw702ptu" path="res://scenes/Menu/remap_menu.tscn" id="8_3e3ua"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_deaoh"]
 

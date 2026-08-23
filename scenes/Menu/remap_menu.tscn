@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://carsknw702ptu"]
 
-[ext_resource type="Script" uid="uid://cb7x78cx3ciju" path="res://scripts/player/remap_menu.gd" id="1_bdyg1"]
+[ext_resource type="Script" uid="uid://cb7x78cx3ciju" path="res://scripts/Menu/remap_menu.gd" id="1_bdyg1"]
 
 [node name="Control" type="Control" unique_id=1446924797]
 layout_mode = 3

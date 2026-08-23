@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dt08oc6ad7d2"]
+
+[ext_resource type="Script" uid="uid://dwyikrkpn2q87" path="res://scripts/Menu/main_menu.gd" id="1_l61h4"]
+
+[node name="MainMenu" type="Control" unique_id=805277247]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_l61h4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2105113128]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 250.0
+offset_right = 725.0
+offset_bottom = 400.0
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=879385230]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=1134494437]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=325278137]
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_level_3_pressed"]
