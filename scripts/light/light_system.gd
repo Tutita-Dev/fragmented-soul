@@ -87,9 +87,9 @@ func _render_beams(segments: Array[Dictionary]) -> void:
 		
 		# --- NUEVO: Material Emisivo ---
 		var mat := StandardMaterial3D.new()
-		mat.albedo_color = Color.CYAN # El color base (ej: cian como en tu imagen)
+		mat.albedo_color = Color.WHITE # El color base (ej: cian como en tu imagen)
 		mat.emission_enabled = true
-		mat.emission = Color.CYAN # El color de la luz que emite
+		mat.emission = Color.WHITE # El color de la luz que emite
 		mat.emission_energy_multiplier = 4.0 # Qué tan fuerte brilla (ajustá a gusto)
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED # Para que no le afecten las sombras
 		
@@ -119,16 +119,25 @@ func _render_beams(segments: Array[Dictionary]) -> void:
 	for i in range(segments.size(), beam_light_pool.size()):
 		beam_light_pool[i].visible = false
 
-	for i in range(segments.size(), beam_pool.size()):
-		beam_pool[i].visible = false
-		
 
 func _get_or_create_beam_light(index: int) -> OmniLight3D:
 	if index >= beam_light_pool.size():
 		var light := OmniLight3D.new()
-		light.omni_range = 1.2
-		light.omni_attenuation = 4.0
-		light.light_energy = 1.5
+		# 1. Aumentamos el radio para que la luz alcance el piso y el entorno
+		light.omni_range = 10
+		
+		# 2. Subimos la energía para que el brillo se note más
+		light.light_energy = 5
+		
+		# 3. Suavizamos la caída de la luz (atenuación)
+		light.omni_attenuation = 2
+		
+		# 4. Le asignamos el color de tu "luz pura"
+		light.light_color = Color("fff5d6")
+		
+		# IMPORTANTE: Forzamos que la luz afecte a todas las capas visuales (Layer 1 a 32)
+		light.light_cull_mask = 0xFFFFFFFF
+		
 		add_child(light)
 		beam_light_pool.append(light)
 	return beam_light_pool[index]
@@ -160,4 +169,4 @@ func _position_beam_between(beam: MeshInstance3D, light: OmniLight3D, from: Vect
 	# --- INICIO DE LÓGICA DE LUZ (B8.6) ---
 	light.global_position = to
 	# Opcional si querés que la luz ilumine un poco más a lo largo en tramos largos:
-	light.omni_range = 1.5
+	light.omni_range = 100
