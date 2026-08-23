@@ -4,8 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://sif5306gt5jl" path="res://scenes/player/soul_orb_asset.tscn" id="2_4kuee"]
 [ext_resource type="Script" uid="uid://ddc6cwvq7mpma" path="res://scripts/player/input_provider.gd" id="2_gfjak"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_o8nba"]
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_4kuee"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfjak"]
@@ -13,17 +11,7 @@
 [node name="Player" type="CharacterBody3D" unique_id=1552124901 groups=["player"]]
 script = ExtResource("1_wr5hl")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1731519691]
-visible = false
-mesh = SubResource("SphereMesh_o8nba")
-
 [node name="Soul_Orb_Asset" parent="." unique_id=1543801712 instance=ExtResource("2_4kuee")]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Soul_Orb_Asset" unique_id=1436368565]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14687157, 0, 0)
-light_energy = 2.5
-omni_range = 10.0
-omni_attenuation = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1072886431]
 shape = SubResource("SphereShape3D_4kuee")

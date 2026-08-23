@@ -3,11 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://b4cb28xaq3aw1" path="res://assets/Soul_Orb_Asset.glb" id="1_0j51x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j28i3"]
-transparency = 1
-blend_mode = 1
 emission_enabled = true
-emission = Color(0.45882353, 1, 1, 1)
-emission_energy_multiplier = 13.49
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkgkh"]
 albedo_color = Color(0, 1, 1, 0.5803922)
@@ -53,6 +51,12 @@ material_override = SubResource("StandardMaterial3D_wkgkh")
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_eqdec")
 draw_pass_1 = SubResource("SphereMesh_m7thh")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Soul_Core" index="1" unique_id=1003196210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14687157, 0, 0)
+light_energy = 2.5
+omni_range = 10.0
+omni_attenuation = 3.0
 
 [node name="Soul_Halo" parent="." index="1" unique_id=1494735928]
 surface_material_override/0 = SubResource("StandardMaterial3D_73eyc")
