@@ -4,13 +4,21 @@ extends CharacterBody3D
 
 enum State { FREE_FLY, POSSESSING }
 
+@export_group("Player Configuration")
 @export var player_id: int = 1
-@export var turn_speed: float = 2.5  # rad/s
-
+@export var turn_speed: float = 2.5   # rad/s
 @export var fly_speed: float = 6.0
 @export var rotate_speed: float = 2.0
 @export var translate_speed: float = 3.0
 
+@export_group("Visual Settings")
+@export var color_player_1: Color = Color(0.0, 0.89, 1.0, 1.0) # Azul / Cian
+@export var color_player_2: Color = Color(1.0, 0.2, 0.651, 1.0) # Rojo / Magenta
+
+# Referencias a los nodos visuales
+@onready var soul_core: MeshInstance3D = $Soul_Orb_Asset/Soul_Core
+@onready var soul_halo: MeshInstance3D = $Soul_Orb_Asset/Soul_Halo
+@onready var particles: GPUParticles3D = $Soul_Orb_Asset/GPUParticles3D
 
 var state: State = State.FREE_FLY
 var possessed_fragment: Node3D = null
@@ -19,8 +27,54 @@ var nearby_fragment: Node3D = null
 @onready var input_provider: InputProvider = $PossessionArea/InputProvider
 
 func _ready() -> void:
-	input_provider.set_player_id(player_id)
+	# Aseguramos la asignación del player_id al InputProvider por método y por propiedad
+	if input_provider:
+		if input_provider.has_method("set_player_id"):
+			input_provider.set_player_id(player_id)
+		else:
+			input_provider.player_id = player_id
+			
+	_setup_player_visuals()
 
+# --- LÓGICA DE VISUALES Y COLORES ---
+func _setup_player_visuals() -> void:
+	var target_color := color_player_1 if player_id == 1 else color_player_2
+	
+	# 1. Configurar Núcleo (Soul_Core)
+	if soul_core:
+		var core_mat: StandardMaterial3D = _get_unique_material(soul_core)
+		core_mat.albedo_color = Color.WHITE
+		core_mat.emission_enabled = true
+		core_mat.emission = target_color
+		core_mat.emission_energy_multiplier = 18.0
+
+	# 2. Configurar Halo (Soul_Halo)
+	if soul_halo:
+		var halo_mat: StandardMaterial3D = _get_unique_material(soul_halo)
+		halo_mat.albedo_color = Color(target_color.r, target_color.g, target_color.b, 0.3)
+		halo_mat.emission_enabled = true
+		halo_mat.emission = target_color
+		halo_mat.emission_energy_multiplier = 7.0
+
+	# 3. Configurar Partículas (GPUParticles3D)
+	if particles:
+		particles.emitting = true
+
+func _get_unique_material(mesh: MeshInstance3D) -> StandardMaterial3D:
+	var mat = mesh.get_surface_override_material(0)
+	if not mat and mesh.mesh:
+		mat = mesh.mesh.surface_get_material(0)
+	
+	if mat:
+		mat = mat.duplicate()
+		mesh.set_surface_override_material(0, mat)
+	else:
+		mat = StandardMaterial3D.new()
+		mesh.set_surface_override_material(0, mat)
+		
+	return mat as StandardMaterial3D
+
+# --- PROCESO PRINCIPAL DE FÍSICA Y ESTADOS ---
 func _physics_process(delta: float) -> void:
 	match state:
 		State.FREE_FLY:
@@ -59,13 +113,27 @@ func _process_possessing(delta: float) -> void:
 		var axis_index := 0 if player_id == 1 else 2
 		possessed_fragment.translate_on_axis(axis_index, translate_input * translate_speed * delta)
 
-
+# --- POSESIÓN Y LIBERACIÓN ---
 func _try_possess(fragment: Node3D) -> void:
 	var fragment_id := str(fragment.get_path())
 	possessed_fragment = fragment
 	state = State.POSSESSING
+	
 	if PossessionManager.try_possess(fragment_id, player_id):
-		visible = false
+		if soul_core: 
+			soul_core.visible = false
+		if particles: 
+			particles.emitting = false
+		
+		if soul_halo:
+			soul_halo.reparent(possessed_fragment)
+			soul_halo.position = Vector3.ZERO
+			
+			var halo_mat = soul_halo.get_surface_override_material(0)
+			if halo_mat is StandardMaterial3D:
+				halo_mat.emission_energy_multiplier = 4.0
+				var target_color := color_player_1 if player_id == 1 else color_player_2
+				halo_mat.albedo_color = Color(target_color.r, target_color.g, target_color.b, 0.15)
 	else:
 		possessed_fragment = null
 		state = State.FREE_FLY
@@ -73,11 +141,26 @@ func _try_possess(fragment: Node3D) -> void:
 func _release_possession() -> void:
 	if possessed_fragment == null:
 		return
+		
+	if soul_halo:
+		soul_halo.reparent($Soul_Orb_Asset)
+		soul_halo.position = Vector3.ZERO
+		
+		var halo_mat = soul_halo.get_surface_override_material(0)
+		if halo_mat is StandardMaterial3D:
+			var target_color := color_player_1 if player_id == 1 else color_player_2
+			halo_mat.emission_energy_multiplier = 7.0
+			halo_mat.albedo_color = Color(target_color.r, target_color.g, target_color.b, 0.3)
+		
+	if soul_core: 
+		soul_core.visible = true
+	if particles: 
+		particles.emitting = true
+	
 	var fragment_id := str(possessed_fragment.get_path())
 	global_position = possessed_fragment.global_position
 	possessed_fragment = null
 	state = State.FREE_FLY
-	visible = true
 	PossessionManager.release(fragment_id)
 
 func _on_possession_area_area_entered(area: Area3D) -> void:

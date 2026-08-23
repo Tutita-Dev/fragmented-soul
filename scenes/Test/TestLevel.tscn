@@ -13,6 +13,10 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_86d4f"]
 
+[sub_resource type="Environment" id="Environment_3e3ua"]
+background_mode = 1
+glow_enabled = true
+
 [node name="TestLevel" type="Node3D" unique_id=1316197581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16239548, 0)
 script = ExtResource("1_wd06p")
@@ -46,14 +50,14 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.25301, 1.3607979, 25.36389
 player_id = 2
 
 [node name="FragmentBase2" parent="." unique_id=1526138773 instance=ExtResource("3_wd06p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.427151, 1.5, 19.56606)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.819918, 1.5, -8.996239)
 can_translate = true
 
 [node name="LightEmitter" parent="." unique_id=1122609926 instance=ExtResource("4_n4ulk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.697178, 1.7818004, 19.066929)
 
 [node name="LightReceptor" parent="." unique_id=879324380 instance=ExtResource("5_wd06p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.719738, 1.5, 10.236103)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.503788, 1.5, -14.708981)
 
 [node name="LightSystem" type="Node3D" parent="." unique_id=154440687 node_paths=PackedStringArray("emitter")]
 script = ExtResource("6_3e3ua")
@@ -61,3 +65,6 @@ emitter = NodePath("../LightEmitter")
 
 [node name="Control" parent="." unique_id=1446924797 instance=ExtResource("8_3e3ua")]
 visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=311335859]
+environment = SubResource("Environment_3e3ua")

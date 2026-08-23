@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://sif5306gt5jl"]
+
+[ext_resource type="PackedScene" uid="uid://b4cb28xaq3aw1" path="res://assets/Soul_Orb_Asset.glb" id="1_0j51x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j28i3"]
+transparency = 1
+blend_mode = 1
+emission_enabled = true
+emission = Color(0.45882353, 1, 1, 1)
+emission_energy_multiplier = 13.49
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wkgkh"]
+albedo_color = Color(0, 1, 1, 0.5803922)
+emission_enabled = true
+emission = Color(15.229851, 18.892157, 18.892157, 1)
+emission_energy_multiplier = 2.41
+
+[sub_resource type="Curve" id="Curve_ebu2r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vdggw"]
+curve = SubResource("Curve_ebu2r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eqdec"]
+emission_shape = 2
+emission_sphere_radius = 0.3
+gravity = Vector3(1, 0.5, 0)
+linear_accel_min = -2.2351742e-06
+linear_accel_max = 2.1499977
+scale_min = 0.049999997
+scale_max = 0.099999994
+scale_curve = SubResource("CurveTexture_vdggw")
+
+[sub_resource type="SphereMesh" id="SphereMesh_m7thh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73eyc"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0, 1, 1, 0.5803922)
+emission_enabled = true
+emission = Color(0, 1, 0.8666667, 1)
+emission_energy_multiplier = 8.0
+
+[node name="Soul_Orb_Asset" unique_id=1543801712 instance=ExtResource("1_0j51x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14687157, 0, 0)
+
+[node name="Soul_Core" parent="." index="0" unique_id=868530390]
+surface_material_override/0 = SubResource("StandardMaterial3D_j28i3")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Soul_Core" index="0" unique_id=912544224]
+material_override = SubResource("StandardMaterial3D_wkgkh")
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_eqdec")
+draw_pass_1 = SubResource("SphereMesh_m7thh")
+
+[node name="Soul_Halo" parent="." index="1" unique_id=1678781570]
+surface_material_override/0 = SubResource("StandardMaterial3D_73eyc")
