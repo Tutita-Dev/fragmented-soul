@@ -33,7 +33,7 @@ transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, 0, 0)
 shape = SubResource("BoxShape3D_deaoh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=134763372]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, -0.0058567524, -0.12810135, 0.03128624)
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, -0.062880754, 0.017957687, 0.004763603)
 mesh = SubResource("PlaneMesh_86d4f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1545155902]
@@ -60,7 +60,7 @@ selected_variant = 7
 can_translate = true
 
 [node name="FragmentBase3" parent="." unique_id=500132480 instance=ExtResource("3_wd06p")]
-transform = Transform3D(2.028, 0, 0, 0, 2, 0, 0, 0, 2, -13.341804, 1.5, 18.183224)
+transform = Transform3D(2.028, 0, 0, 0, 2, 0, 0, 0, 2, -17.602509, 1.5, -3.3925648)
 selected_variant = 7
 can_translate = true
 
