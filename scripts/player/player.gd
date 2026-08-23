@@ -19,6 +19,7 @@ enum State { FREE_FLY, POSSESSING }
 @onready var soul_core: MeshInstance3D = $Soul_Orb_Asset/Soul_Core
 @onready var soul_halo: MeshInstance3D = $Soul_Orb_Asset/Soul_Halo
 @onready var particles: GPUParticles3D = $Soul_Orb_Asset/GPUParticles3D
+@onready var orb_light: OmniLight3D = $Soul_Orb_Asset/OmniLight3D  
 
 var state: State = State.FREE_FLY
 var possessed_fragment: Node3D = null
@@ -136,6 +137,10 @@ func _try_possess(fragment: Node3D) -> void:
 				halo_mat.emission_energy_multiplier = 4.0
 				var target_color := color_player_1 if player_id == 1 else color_player_2
 				halo_mat.albedo_color = Color(target_color.r, target_color.g, target_color.b, 0.15)
+				
+		if orb_light:
+			orb_light.reparent(possessed_fragment)
+			orb_light.position = Vector3.ZERO
 	else:
 		possessed_fragment = null
 		state = State.FREE_FLY
@@ -154,6 +159,10 @@ func _release_possession() -> void:
 			var target_color := color_player_1 if player_id == 1 else color_player_2
 			halo_mat.emission_energy_multiplier = 7.0
 			halo_mat.albedo_color = Color(target_color.r, target_color.g, target_color.b, 0.3)
+	
+	if orb_light:
+		orb_light.reparent($Soul_Orb_Asset)
+		orb_light.position = Vector3.ZERO
 		
 	if soul_core: 
 		soul_core.visible = true

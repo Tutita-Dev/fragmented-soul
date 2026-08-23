@@ -11,6 +11,7 @@ const MAX_RAY_DISTANCE := 100.0  # alcance real del raycast, no tocar por escala
 @export var miss_beam_length: float = 100
 
 var beam_pool: Array[MeshInstance3D] = []
+var beam_light_pool: Array[OmniLight3D] = []
 var _needs_retrace := true
 
 func _ready() -> void:
@@ -95,6 +96,18 @@ func _render_beams(segments: Array[Dictionary]) -> void:
 
 	for i in range(segments.size(), beam_pool.size()):
 		beam_pool[i].visible = false
+		
+
+func _get_or_create_beam_light(index: int) -> OmniLight3D:
+	if index >= beam_light_pool.size():
+		var light := OmniLight3D.new()
+		light.omni_range = 1.2
+		light.omni_attenuation = 4.0
+		light.light_energy = 1.5
+		add_child(light)
+		beam_light_pool.append(light)
+	return beam_light_pool[index]
+	
 
 func _position_beam_between(beam: MeshInstance3D, from: Vector3, to: Vector3) -> void:
 	var mid := (from + to) / 2.0

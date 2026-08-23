@@ -15,7 +15,11 @@
 
 [sub_resource type="Environment" id="Environment_3e3ua"]
 background_mode = 1
+ambient_light_source = 1
+ambient_light_energy = 0.0
 glow_enabled = true
+glow_intensity = 0.8
+glow_bloom = 0.1
 
 [node name="TestLevel" type="Node3D" unique_id=1316197581]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16239548, 0)
@@ -34,6 +38,7 @@ mesh = SubResource("PlaneMesh_86d4f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1545155902]
 transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 28.438509, 14.160107)
+visible = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=954987854]
 transform = Transform3D(1, 0, 0, 0, 0.840784, 0.5413708, 0, -0.5413708, 0.840784, 0, 16.497387, 46.821404)
@@ -45,8 +50,8 @@ player2 = NodePath("../Player2")
 [node name="Player" parent="." unique_id=1552124901 instance=ExtResource("2_n4ulk")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -11.932255, 1.0568905, 23.944695)
 
-[node name="Player2" parent="." unique_id=626304499 instance=ExtResource("2_n4ulk")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.25301, 1.3607979, 25.363894)
+[node name="Player2" parent="." unique_id=331267069 instance=ExtResource("2_n4ulk")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.13257599, 1.0568905, 23.944695)
 player_id = 2
 
 [node name="FragmentBase2" parent="." unique_id=1526138773 instance=ExtResource("3_wd06p")]
@@ -74,3 +79,6 @@ visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=311335859]
 environment = SubResource("Environment_3e3ua")
+
+[node name="FragmentBase" parent="." unique_id=240462846 instance=ExtResource("3_wd06p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7844496, 4.459001, 19.842632)
