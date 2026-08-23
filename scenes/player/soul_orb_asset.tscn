@@ -45,7 +45,7 @@ emission_energy_multiplier = 8.0
 [node name="Soul_Orb_Asset" unique_id=1543801712 instance=ExtResource("1_0j51x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14687157, 0, 0)
 
-[node name="Soul_Core" parent="." index="0" unique_id=868530390]
+[node name="Soul_Core" parent="." index="0" unique_id=2080511511]
 surface_material_override/0 = SubResource("StandardMaterial3D_j28i3")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Soul_Core" index="0" unique_id=912544224]
@@ -54,5 +54,5 @@ amount = 10
 process_material = SubResource("ParticleProcessMaterial_eqdec")
 draw_pass_1 = SubResource("SphereMesh_m7thh")
 
-[node name="Soul_Halo" parent="." index="1" unique_id=1678781570]
+[node name="Soul_Halo" parent="." index="1" unique_id=1494735928]
 surface_material_override/0 = SubResource("StandardMaterial3D_73eyc")

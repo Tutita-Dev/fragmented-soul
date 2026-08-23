@@ -166,7 +166,7 @@ func _release_possession() -> void:
 	state = State.FREE_FLY
 	PossessionManager.release(fragment_id)
 
-# --- CÁLCULO DE TAMAÑO PARA EL HALO (SIN ACHICAR) ---
+		# --- CÁLCULO DE TAMAÑO PARA EL HALO ---
 func _fit_halo_to_fragment(target_fragment: Node3D) -> void:
 	var mesh_inst: MeshInstance3D = target_fragment.get_node_or_null("MeshInstance3D")
 	
@@ -176,25 +176,27 @@ func _fit_halo_to_fragment(target_fragment: Node3D) -> void:
 				mesh_inst = child
 				break
 
-	# Obtenemos el factor de escala global del fragmento padre
-	var parent_scale: float = target_fragment.global_transform.basis.get_scale().length() / sqrt(3.0)
-	if parent_scale <= 0.0:
-		parent_scale = 1.0
+	# 1. Calculamos la dimensión mínima basada en el Soul_Core
+	var core_min_size: float = 1.0
+	if soul_core and soul_core.mesh:
+		var core_aabb: AABB = soul_core.mesh.get_aabb()
+		var core_scale: Vector3 = soul_core.global_transform.basis.get_scale()
+		core_min_size = (core_aabb.size * core_scale).length()
 
 	if mesh_inst and mesh_inst.mesh:
 		var aabb: AABB = mesh_inst.mesh.get_aabb()
 		var scale_vector: Vector3 = mesh_inst.global_transform.basis.get_scale()
 		var max_dimension: float = (aabb.size * scale_vector).length()
 		
-		# Tamaño deseado en el mundo según el fragmento
-		var desired_world_scale: float = max_dimension * 0.4
+		# 2. Si la dimensión del fragmento es menor a la del núcleo, no se achica
+		var calculated_scale: float = max_dimension * 0.4
+		var final_scale: float = maxf(core_min_size, calculated_scale)
 		
-		# Forzamos a que el tamaño final visual NUNCA baje de 1.0
-		var final_world_scale: float = maxf(1.0, desired_world_scale)
-		
+		var desired_scale := Vector3.ONE * final_scale
+		soul_halo.scale = desired_scale
 	else:
-		var desired_world_scale: float = maxf(1.0, target_fragment.scale.length() * 2.0)
-		soul_halo.scale = Vector3.ONE * (desired_world_scale / parent_scale)
+		var fallback_scale: float = maxf(core_min_size, target_fragment.scale.length() * 1.5)
+		soul_halo.scale = Vector3.ONE * fallback_scale
 
 
 func _on_possession_area_area_entered(area: Area3D) -> void:
