@@ -30,6 +30,7 @@ spring_length = 4.0
 script = ExtResource("1_iurfe")
 
 [node name="Camera3D" type="Camera3D" parent="HBoxContainer/SubViewportContainerP1/SubViewport/SpringArm3D" unique_id=1587257724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 current = true
 
 [node name="SubViewportContainerP2" type="SubViewportContainer" parent="HBoxContainer" unique_id=596105307]
@@ -47,4 +48,3 @@ spring_length = 4.0
 script = ExtResource("1_iurfe")
 
 [node name="Camera3D" type="Camera3D" parent="HBoxContainer/SubViewportContainerP2/SubViewport/SpringArm3D" unique_id=623934246]
-current = true

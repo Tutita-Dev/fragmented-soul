@@ -1,0 +1,142 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://do5udrhl7s4g1"
+path="res://.godot/imported/fragmentos.glb-3e1040beeae216126a5a849a94eb09cc.scn"
+
+[deps]
+
+source_file="res://assets/fragmentos.glb"
+dest_files=["res://.godot/imported/fragmentos.glb-3e1040beeae216126a5a849a94eb09cc.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"materials": {
+"M_Crystal_Fragment": {
+"use_external/enabled": false,
+"use_external/fallback_path": "",
+"use_external/path": "uid://rvfa04olwj84"
+}
+},
+"meshes": {
+"fragmentos_Crystal_Fragment_01_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_01_Mesh.res",
+"save_to_file/path": "uid://bltidyy1pbr51"
+},
+"fragmentos_Crystal_Fragment_02_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_02_Mesh.res",
+"save_to_file/path": "uid://bw8q67e231pf1"
+},
+"fragmentos_Crystal_Fragment_03_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_03_Mesh.res",
+"save_to_file/path": "uid://dolkciq1wlu7u"
+},
+"fragmentos_Crystal_Fragment_04_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_04_Mesh.res",
+"save_to_file/path": "uid://ccgduxal76f2v"
+},
+"fragmentos_Crystal_Fragment_05_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_05_Mesh.res",
+"save_to_file/path": "uid://br0ngo3hwa8ru"
+},
+"fragmentos_Crystal_Fragment_06_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_06_Mesh.res",
+"save_to_file/path": "uid://dw5gl6j43lsom"
+},
+"fragmentos_Crystal_Fragment_07_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_07_Mesh.res",
+"save_to_file/path": "uid://bpeahslrc47mo"
+},
+"fragmentos_Crystal_Fragment_08_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_08_Mesh.res",
+"save_to_file/path": "uid://cjbpbli70l5gj"
+},
+"fragmentos_Crystal_Fragment_09_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_09_Mesh.res",
+"save_to_file/path": "uid://bj4e8srbopbu5"
+},
+"fragmentos_Crystal_Fragment_10_Mesh": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://assets/mesh/fragmentos_Crystal_Fragment_10_Mesh.res",
+"save_to_file/path": "uid://brjctbk6iw7rm"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

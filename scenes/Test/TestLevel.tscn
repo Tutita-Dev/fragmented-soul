@@ -29,7 +29,7 @@ transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, 0, 0)
 shape = SubResource("BoxShape3D_deaoh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=134763372]
-transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, -0.0058567524, -0.12810135, 0.03128624)
 mesh = SubResource("PlaneMesh_86d4f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1545155902]
@@ -50,7 +50,13 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.25301, 1.3607979, 25.36389
 player_id = 2
 
 [node name="FragmentBase2" parent="." unique_id=1526138773 instance=ExtResource("3_wd06p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.669914, 1.5, -56.32657)
+transform = Transform3D(0.507, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -17.669914, 1.5, 22.18045)
+selected_variant = 7
+can_translate = true
+
+[node name="FragmentBase3" parent="." unique_id=500132480 instance=ExtResource("3_wd06p")]
+transform = Transform3D(2.028, 0, 0, 0, 2, 0, 0, 0, 2, -13.341804, 1.5, 18.183224)
+selected_variant = 7
 can_translate = true
 
 [node name="LightEmitter" parent="." unique_id=1122609926 instance=ExtResource("4_n4ulk")]

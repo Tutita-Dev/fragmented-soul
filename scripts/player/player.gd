@@ -27,7 +27,6 @@ var nearby_fragment: Node3D = null
 @onready var input_provider: InputProvider = $PossessionArea/InputProvider
 
 func _ready() -> void:
-	# Aseguramos la asignación del player_id al InputProvider por método y por propiedad
 	if input_provider:
 		if input_provider.has_method("set_player_id"):
 			input_provider.set_player_id(player_id)
@@ -129,6 +128,9 @@ func _try_possess(fragment: Node3D) -> void:
 			soul_halo.reparent(possessed_fragment)
 			soul_halo.position = Vector3.ZERO
 			
+			# Adapta la escala del Halo según el tamaño real de la malla/fragmento
+			_fit_halo_to_fragment(possessed_fragment)
+			
 			var halo_mat = soul_halo.get_surface_override_material(0)
 			if halo_mat is StandardMaterial3D:
 				halo_mat.emission_energy_multiplier = 4.0
@@ -145,6 +147,7 @@ func _release_possession() -> void:
 	if soul_halo:
 		soul_halo.reparent($Soul_Orb_Asset)
 		soul_halo.position = Vector3.ZERO
+		soul_halo.scale = Vector3.ONE  # Restablece la escala original del Halo
 		
 		var halo_mat = soul_halo.get_surface_override_material(0)
 		if halo_mat is StandardMaterial3D:
@@ -162,6 +165,37 @@ func _release_possession() -> void:
 	possessed_fragment = null
 	state = State.FREE_FLY
 	PossessionManager.release(fragment_id)
+
+# --- CÁLCULO DE TAMAÑO PARA EL HALO (SIN ACHICAR) ---
+func _fit_halo_to_fragment(target_fragment: Node3D) -> void:
+	var mesh_inst: MeshInstance3D = target_fragment.get_node_or_null("MeshInstance3D")
+	
+	if not mesh_inst:
+		for child in target_fragment.get_children():
+			if child is MeshInstance3D and child.visible:
+				mesh_inst = child
+				break
+
+	# Obtenemos el factor de escala global del fragmento padre
+	var parent_scale: float = target_fragment.global_transform.basis.get_scale().length() / sqrt(3.0)
+	if parent_scale <= 0.0:
+		parent_scale = 1.0
+
+	if mesh_inst and mesh_inst.mesh:
+		var aabb: AABB = mesh_inst.mesh.get_aabb()
+		var scale_vector: Vector3 = mesh_inst.global_transform.basis.get_scale()
+		var max_dimension: float = (aabb.size * scale_vector).length()
+		
+		# Tamaño deseado en el mundo según el fragmento
+		var desired_world_scale: float = max_dimension * 0.4
+		
+		# Forzamos a que el tamaño final visual NUNCA baje de 1.0
+		var final_world_scale: float = maxf(1.0, desired_world_scale)
+		
+	else:
+		var desired_world_scale: float = maxf(1.0, target_fragment.scale.length() * 2.0)
+		soul_halo.scale = Vector3.ONE * (desired_world_scale / parent_scale)
+
 
 func _on_possession_area_area_entered(area: Area3D) -> void:
 	if area.is_in_group("possessable"):

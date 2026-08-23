@@ -3,6 +3,17 @@
 class_name Fragment
 extends Node3D
 
+@export_group("Visual Mesh")
+## Arrastra los archivos de malla (.mesh / .tres) a esta lista
+@export var mesh_variants: Array[Mesh] = []
+
+## Selecciona la variante a usar (0 a 9)
+@export var selected_variant: int = 0:
+	set(value):
+		selected_variant = clamp(value, 0, max(0, mesh_variants.size() - 1))
+		_update_mesh()
+
+@export_group("Fragment Configuration")
 @export var can_translate: bool = false:
 	set(value):
 		can_translate = value
@@ -15,14 +26,33 @@ extends Node3D
 
 @export var behavior: ReflectionBehavior
 
+@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+
 var origin_position: Vector3
 var _range_gizmo: MeshInstance3D
 
 func _ready() -> void:
-	origin_position = position
+	if not Engine.is_editor_hint():
+		origin_position = position
+		
+	_update_mesh()
 	_update_range_gizmo()
 
+# --- Lógica de actualización de malla ---
+
+func _update_mesh() -> void:
+	if not mesh_instance:
+		mesh_instance = get_node_or_null("MeshInstance3D")
+	
+	if mesh_instance and mesh_variants.size() > selected_variant:
+		mesh_instance.mesh = mesh_variants[selected_variant]
+
+# --- Lógica de movimiento ---
+
 func translate_on_axis(axis_index: int, delta_amount: float) -> void:
+	if Engine.is_editor_hint():
+		return
+		
 	var new_val := position[axis_index] + delta_amount
 	var min_val := origin_position[axis_index] - translate_range
 	var max_val := origin_position[axis_index] + translate_range

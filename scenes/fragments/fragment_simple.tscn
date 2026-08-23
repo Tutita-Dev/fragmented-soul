@@ -2,6 +2,25 @@
 
 [ext_resource type="PackedScene" uid="uid://jj025m0hty0d" path="res://scenes/fragments/FragmentBase.tscn" id="1_xxccm"]
 [ext_resource type="Resource" uid="uid://pbp57yjmghdq" path="res://resources/behaviors/simple_reflection.tres" id="2_05ter"]
+[ext_resource type="ArrayMesh" uid="uid://bj4e8srbopbu5" path="res://assets/mesh/fragmentos_Crystal_Fragment_09_Mesh.res" id="2_70yyi"]
+[ext_resource type="ArrayMesh" uid="uid://bltidyy1pbr51" path="res://assets/mesh/fragmentos_Crystal_Fragment_01_Mesh.res" id="3_sd5v0"]
+[ext_resource type="ArrayMesh" uid="uid://bw8q67e231pf1" path="res://assets/mesh/fragmentos_Crystal_Fragment_02_Mesh.res" id="3_v6fqp"]
+[ext_resource type="ArrayMesh" uid="uid://dolkciq1wlu7u" path="res://assets/mesh/fragmentos_Crystal_Fragment_03_Mesh.res" id="5_1q2il"]
+[ext_resource type="ArrayMesh" uid="uid://ccgduxal76f2v" path="res://assets/mesh/fragmentos_Crystal_Fragment_04_Mesh.res" id="5_amhvs"]
+[ext_resource type="ArrayMesh" uid="uid://br0ngo3hwa8ru" path="res://assets/mesh/fragmentos_Crystal_Fragment_05_Mesh.res" id="6_amhvs"]
+[ext_resource type="ArrayMesh" uid="uid://dw5gl6j43lsom" path="res://assets/mesh/fragmentos_Crystal_Fragment_06_Mesh.res" id="7_wy17o"]
+[ext_resource type="ArrayMesh" uid="uid://bpeahslrc47mo" path="res://assets/mesh/fragmentos_Crystal_Fragment_07_Mesh.res" id="8_8w5di"]
+[ext_resource type="ArrayMesh" uid="uid://brjctbk6iw7rm" path="res://assets/mesh/fragmentos_Crystal_Fragment_10_Mesh.res" id="9_vt5q0"]
+[ext_resource type="ArrayMesh" uid="uid://cjbpbli70l5gj" path="res://assets/mesh/fragmentos_Crystal_Fragment_08_Mesh.res" id="9_wy17o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gq6y"]
+albedo_color = Color(1, 0.05882353, 1, 0.7490196)
 
 [node name="FragmentBase" unique_id=500132480 instance=ExtResource("1_xxccm")]
+mesh_variants = Array[Mesh]([ExtResource("3_sd5v0"), ExtResource("3_v6fqp"), ExtResource("5_1q2il"), ExtResource("5_amhvs"), ExtResource("6_amhvs"), ExtResource("7_wy17o"), ExtResource("8_8w5di"), ExtResource("9_wy17o"), ExtResource("2_70yyi"), ExtResource("9_vt5q0")])
 behavior = ExtResource("2_05ter")
+
+[node name="MeshInstance3D" parent="." index="0" unique_id=1100412050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009473681, 0.0022033453, 0)
+mesh = ExtResource("3_sd5v0")
+surface_material_override/0 = SubResource("StandardMaterial3D_7gq6y")

@@ -7,7 +7,7 @@ extends SpringArm3D
 @export var rotation_speed: float = 6.0
 
 func _ready() -> void:
-	spring_length = 4.0
+	spring_length = 10.0 # Estaba en 4.0, sube a 7.0 u 8.0 para alejarla
 
 func _process(delta: float) -> void:
 	if not target or not player:
