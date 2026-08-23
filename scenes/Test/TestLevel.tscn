@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dskbadhsqnk4u" path="res://scenes/light_emitter/light_emitter.tscn" id="4_n4ulk"]
 [ext_resource type="PackedScene" uid="uid://b31w2vtbcqare" path="res://scenes/light_receptor/light_receptor.tscn" id="5_wd06p"]
 [ext_resource type="Script" uid="uid://bws61gquuks0d" path="res://scripts/light/light_system.gd" id="6_3e3ua"]
+[ext_resource type="PackedScene" uid="uid://carsknw702ptu" path="res://scenes/player/remap_menu.tscn" id="8_3e3ua"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_deaoh"]
 
@@ -57,3 +58,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.719738, 1.5, 10.236103)
 [node name="LightSystem" type="Node3D" parent="." unique_id=154440687 node_paths=PackedStringArray("emitter")]
 script = ExtResource("6_3e3ua")
 emitter = NodePath("../LightEmitter")
+
+[node name="Control" parent="." unique_id=1446924797 instance=ExtResource("8_3e3ua")]
+visible = false

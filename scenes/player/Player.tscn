@@ -9,7 +9,7 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfjak"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1552124901]
+[node name="Player" type="CharacterBody3D" unique_id=1552124901 groups=["player"]]
 script = ExtResource("1_wr5hl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1731519691]

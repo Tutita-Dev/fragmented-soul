@@ -21,6 +21,21 @@ func _build_actions() -> void:
 		"possess": prefix + "possess",
 	}
 
+func rebind_action(logical_action: String, event: InputEvent) -> bool:
+	if not _actions.has(logical_action):
+		push_warning("InputProvider: acción lógica desconocida: %s" % logical_action)
+		return false
+	var action_name: String = _actions[logical_action]
+	InputMap.action_erase_events(action_name)
+	InputMap.action_add_event(action_name, event)
+	return true
+
+func get_current_event_text(logical_action: String) -> String:
+	if not _actions.has(logical_action):
+		return "—"
+	var events := InputMap.action_get_events(_actions[logical_action])
+	return events[0].as_text() if events.size() > 0 else "—"
+
 func get_move_vector() -> Vector3:
 	var dir := Vector3.ZERO
 	dir.x = Input.get_action_strength(_actions.right) - Input.get_action_strength(_actions.left)
@@ -52,3 +67,6 @@ func get_vertical_input() -> float:
 func set_player_id(id: int) -> void:
 	player_id = id
 	_build_actions()
+	
+func get_action_name(logical_action: String) -> String:
+	return _actions.get(logical_action, "")
