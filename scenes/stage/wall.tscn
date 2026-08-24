@@ -10,7 +10,7 @@ material = SubResource("StandardMaterial3D_4o5d8")
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
 [node name="wall" type="StaticBody3D" unique_id=88925316]
-transform = Transform3D(1.6619811, 0, 0, 0, 1, 0, 0, 0, 0.26399958, 0, 0, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0, 0)
 collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=345329177]

@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bws61gquuks0d" path="res://scripts/light/light_system.gd" id="7_rw5g5"]
 [ext_resource type="PackedScene" uid="uid://carsknw702ptu" path="res://scenes/Menu/remap_menu.tscn" id="8_f66gg"]
 [ext_resource type="PackedScene" uid="uid://03iwguv63vhm" path="res://scenes/fragments/fragment_variable_angle.tscn" id="8_inlfm"]
-[ext_resource type="PackedScene" uid="uid://bcyijphb83y15" path="res://scenes/stage/wall.tscn" id="9_e3qul"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_deaoh"]
 
@@ -80,9 +79,3 @@ environment = SubResource("Environment_3e3ua")
 [node name="FragmentBase" parent="." unique_id=500132480 instance=ExtResource("8_inlfm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.647, 1.5, 18.962)
 selected_variant = 5
-
-[node name="Pared" parent="." unique_id=88925316 instance=ExtResource("9_e3qul")]
-transform = Transform3D(6.2261763, 0, 0, 0, 3.3864887, 0, 0, 0, 0.26399958, -36.992893, 1.7330978, 16.994658)
-
-[node name="Pared2" parent="." unique_id=295468211 instance=ExtResource("9_e3qul")]
-transform = Transform3D(6.2261763, 0, 0, 0, 3.3864887, 0, 0, 0, 0.26399958, -30.904982, 1.7330978, 16.994658)
