@@ -275,7 +275,8 @@ func _position_beam_between(beam: MeshInstance3D, light: OmniLight3D, from: Vect
 	# --- INICIO DE LÓGICA DE LUZ (B8.6) ---
 	light.global_position = to
 	# Opcional si querés que la luz ilumine un poco más a lo largo en tramos largos:
-	light.omni_range = 100
+	light.omni_range = 4
+	
 	
 	
 	

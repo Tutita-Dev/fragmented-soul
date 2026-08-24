@@ -9,6 +9,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfjak"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1552124901 groups=["player"]]
+collision_mask = 5
 script = ExtResource("1_wr5hl")
 
 [node name="Soul_Orb_Asset" parent="." unique_id=1543801712 instance=ExtResource("2_4kuee")]
