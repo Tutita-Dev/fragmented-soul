@@ -38,10 +38,13 @@ func _ready() -> void:
 
 # --- Lógica de actualización de malla ---
 func _update_mesh() -> void:
+	if not is_inside_tree():
+		return
+
 	if not mesh_instance:
 		mesh_instance = get_node_or_null("MeshInstance3D")
 	if not collision_shape:
-		collision_shape = get_node_or_null("CollisionShape3D")  # ajustá si aplica
+		collision_shape = get_node_or_null("Area3D/CollisionShape3D")
 
 	if mesh_instance and mesh_variants.size() > selected_variant:
 		var current_mesh: Mesh = mesh_variants[selected_variant]

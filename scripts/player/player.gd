@@ -74,7 +74,7 @@ func _update_visuals_safe() -> void:
 			notify_property_list_changed()
 			
 			# Redibujar la escena activa en el editor
-			var main_screen = EditorInterface.get_editor_main_screen() if Engine.has_singleton("EditorInterface") else null
+			#var main_screen = EditorInterface.get_editor_main_screen() if Engine.has_singleton("EditorInterface") else null
 			if soul_core:
 				soul_core.update_gizmos()
 			if soul_halo:
