@@ -9,7 +9,7 @@ material = SubResource("StandardMaterial3D_4o5d8")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qtau7"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
-[node name="Pared" type="StaticBody3D" unique_id=88925316]
+[node name="wall" type="StaticBody3D" unique_id=88925316]
 transform = Transform3D(1.6619811, 0, 0, 0, 1, 0, 0, 0, 0.26399958, 0, 0, 0)
 collision_layer = 4
 

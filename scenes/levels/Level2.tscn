@@ -40,6 +40,7 @@ mesh = SubResource("PlaneMesh_86d4f")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1545155902]
 transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 28.438509, 14.160107)
+visible = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=954987854]
 transform = Transform3D(1, 0, 0, 0, 0.840784, 0.5413708, 0, -0.5413708, 0.840784, 0, 16.497387, 46.821404)
@@ -81,4 +82,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.647, 1.5, 18.962)
 selected_variant = 5
 
 [node name="Pared" parent="." unique_id=88925316 instance=ExtResource("9_e3qul")]
-transform = Transform3D(1.6619811, 0, 0, 0, 1, 0, 0, 0, 0.26399958, -37.292553, 5.1078396, 18.533033)
+transform = Transform3D(6.2261763, 0, 0, 0, 3.3864887, 0, 0, 0, 0.26399958, -36.992893, 1.7330978, 16.994658)
+
+[node name="Pared2" parent="." unique_id=295468211 instance=ExtResource("9_e3qul")]
+transform = Transform3D(6.2261763, 0, 0, 0, 3.3864887, 0, 0, 0, 0.26399958, -30.904982, 1.7330978, 16.994658)
