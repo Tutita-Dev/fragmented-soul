@@ -1,7 +1,7 @@
 class_name SplitReflection
 extends ReflectionBehavior
 
-const SPLIT_ANGLE_DEG := 15.0
+@export var SPLIT_ANGLE_DEG := 15.0
 
 func reflect_multi(incoming_dir: Vector3, normal: Vector3) -> Array[Vector3]:
 	var base := incoming_dir.bounce(normal)

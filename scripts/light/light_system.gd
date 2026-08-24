@@ -2,6 +2,7 @@ class_name LightSystem
 extends Node3D
 
 const FRAGMENT_MASK := 2  # bit de Layer 2 (fragmentos + receptor)
+const ENVIRONMENT_MASK := 4  # bit de Layer 3 (piso, paredes, geometría de nivel)
 const MAX_BOUNCES := 8
 const MAX_RAY_DISTANCE := 100.0  # alcance real del raycast, no tocar por escala de nivel
 
@@ -58,7 +59,7 @@ func _trace_recursive(origin: Vector3, direction: Vector3, bounce_count: int, wo
 	var query := PhysicsRayQueryParameters3D.create(
 		origin, origin + direction.normalized() * MAX_RAY_DISTANCE
 	)
-	query.collision_mask = FRAGMENT_MASK
+	query.collision_mask = FRAGMENT_MASK | ENVIRONMENT_MASK
 	query.collide_with_areas = false
 	query.collide_with_bodies = true
 
@@ -275,5 +276,6 @@ func _position_beam_between(beam: MeshInstance3D, light: OmniLight3D, from: Vect
 	light.global_position = to
 	# Opcional si querés que la luz ilumine un poco más a lo largo en tramos largos:
 	light.omni_range = 100
+	
 	
 	
