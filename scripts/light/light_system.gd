@@ -12,7 +12,18 @@ const MAX_RAY_DISTANCE := 100.0  # alcance real del raycast, no tocar por escala
 
 var beam_pool: Array[MeshInstance3D] = []
 var beam_light_pool: Array[OmniLight3D] = []
+
+# Pool bidimensional: cada segmento del rayo tendrá su propia sub-lista de luces alineadas
+#var beam_light_pool: Array[Array] = []
+
 var _needs_retrace := true
+
+
+
+const BEAM_LIGHT_SPACING := 2.0     # distancia deseada entre luces (ajustar a gusto)
+const BEAM_LIGHT_MAX_PER_SEGMENT := 6  # tope de seguridad, performance
+
+
 
 func _ready() -> void:
 	PossessionManager.fragment_possessed.connect(_on_possession_changed)
@@ -77,6 +88,50 @@ func _trace_recursive(origin: Vector3, direction: Vector3, bounce_count: int, wo
 	for new_dir in new_dirs:
 		_trace_recursive(result.position, new_dir, bounce_count + 1, world, out_segments)
 
+#func _render_beams(segments: Array[Dictionary]) -> void:
+	#while beam_pool.size() < segments.size():
+		#var mesh := MeshInstance3D.new()
+		#var cyl := CylinderMesh.new()
+		#cyl.top_radius = 0.05
+		#cyl.bottom_radius = 0.05
+		#cyl.height = 2.0
+		#
+		## Material emisivo del cilindro
+		#var mat := StandardMaterial3D.new()
+		#mat.albedo_color = Color("fff5d6")
+		#mat.emission_enabled = true
+		#mat.emission = Color("fff5d6")
+		#mat.emission_energy_multiplier = 4.0
+		#mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		#cyl.material = mat
+		#
+		#mesh.mesh = cyl
+		#add_child(mesh)
+		#beam_pool.append(mesh)
+#
+	## 1. Primero, ocultamos TODAS las luces del pool globalmente para evitar que arrastren estados viejos
+	#for segment_lights in beam_light_pool:
+		#for light in segment_lights:
+			#(light as OmniLight3D).visible = false
+#
+	## 2. Renderizamos cada segmento activo y sus respectivas luces
+	#for i in segments.size():
+		#var seg = segments[i]
+		#var beam = beam_pool[i]
+		#beam.visible = true
+		#
+		#var dist = seg["from"].distance_to(seg["to"])
+		#var light_count = clampi(int(ceil(dist / BEAM_LIGHT_SPACING)), 1, BEAM_LIGHT_MAX_PER_SEGMENT)
+		#var segment_lights = _get_or_create_beam_lights_for_segment(i, light_count)
+#
+		#_position_beam_between(beam, segment_lights, seg["from"], seg["to"], dist, light_count)
+#
+	## 3. Ocultar mallas de segmentos sobrantes
+	#for i in range(segments.size(), beam_pool.size()):
+		#beam_pool[i].visible = false
+		#
+
+
 func _render_beams(segments: Array[Dictionary]) -> void:
 	while beam_pool.size() < segments.size():
 		var mesh := MeshInstance3D.new()
@@ -119,6 +174,22 @@ func _render_beams(segments: Array[Dictionary]) -> void:
 	for i in range(segments.size(), beam_light_pool.size()):
 		beam_light_pool[i].visible = false
 
+#func _get_or_create_beam_lights_for_segment(segment_index: int, required_count: int) -> Array:
+	#if segment_index >= beam_light_pool.size():
+		#beam_light_pool.append([])
+	#
+	#var segment_lights: Array = beam_light_pool[segment_index]
+	#
+	#while segment_lights.size() < required_count:
+		#var light := OmniLight3D.new()
+		#light.omni_range = 4.0      # Rango individual más acotado para no pasarnos de brillo
+		#light.light_energy = 2.5      # Energía equilibrada
+		#light.omni_attenuation = 1.5
+		#light.light_color = Color("fff5d6") # Tu color de "luz pura"
+		#add_child(light)
+		#segment_lights.append(light)
+		#
+	#return segment_lights
 
 func _get_or_create_beam_light(index: int) -> OmniLight3D:
 	if index >= beam_light_pool.size():
@@ -142,6 +213,40 @@ func _get_or_create_beam_light(index: int) -> OmniLight3D:
 		beam_light_pool.append(light)
 	return beam_light_pool[index]
 	
+
+#func _position_beam_between(beam: MeshInstance3D, lights: Array, from: Vector3, to: Vector3, dist: float, light_count: int) -> void:
+	#if dist < 0.001:
+		#beam.visible = false
+		#for l in lights:
+			#(l as OmniLight3D).visible = false
+		#return
+		#
+	#var mid := (from + to) / 2.0
+	#var dir := (to - from) / dist  
+#
+	#var up_ref := Vector3.UP
+	#if absf(dir.dot(Vector3.UP)) > 0.99:
+		#up_ref = Vector3.RIGHT
+		#
+	## Posicionar la malla (Fix B5 intacto)
+	#beam.scale = Vector3.ONE
+	#beam.global_position = mid
+	#beam.look_at(to, up_ref)
+	#beam.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+	#beam.scale.y = dist / 2.0
+	#
+	## Mostrar y distribuir SOLO las light_count necesarias
+	#for j in range(lights.size()):
+		#var light: OmniLight3D = lights[j]
+		#if j >= light_count:
+			#light.visible = false   # <- esto es lo que faltaba: apaga las sobrantes del array viejo
+			#continue
+		#light.visible = true
+		#if light_count == 1:
+			#light.global_position = mid
+		#else:
+			#var t = float(j) / float(light_count - 1)
+			#light.global_position = from.lerp(to, t)
 
 # Se agrega el parámetro 'light' a la firma
 func _position_beam_between(beam: MeshInstance3D, light: OmniLight3D, from: Vector3, to: Vector3) -> void:
@@ -170,3 +275,5 @@ func _position_beam_between(beam: MeshInstance3D, light: OmniLight3D, from: Vect
 	light.global_position = to
 	# Opcional si querés que la luz ilumine un poco más a lo largo en tramos largos:
 	light.omni_range = 100
+	
+	

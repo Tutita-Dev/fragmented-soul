@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://jj025m0hty0d"]
 
 [ext_resource type="Script" uid="uid://72v21iu42es2" path="res://scripts/mirror/fragment.gd" id="1_n7wok"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uakvs"]
-albedo_color = Color(1, 0.5058824, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_uakvs"]
-material = SubResource("StandardMaterial3D_uakvs")
+[ext_resource type="ArrayMesh" uid="uid://bltidyy1pbr51" path="res://assets/mesh/fragmentos_Crystal_Fragment_01_Mesh.res" id="2_rgf3h"]
+[ext_resource type="ArrayMesh" uid="uid://bw8q67e231pf1" path="res://assets/mesh/fragmentos_Crystal_Fragment_02_Mesh.res" id="3_x8hwx"]
+[ext_resource type="ArrayMesh" uid="uid://dolkciq1wlu7u" path="res://assets/mesh/fragmentos_Crystal_Fragment_03_Mesh.res" id="4_fm3xo"]
+[ext_resource type="ArrayMesh" uid="uid://ccgduxal76f2v" path="res://assets/mesh/fragmentos_Crystal_Fragment_04_Mesh.res" id="5_cpmib"]
+[ext_resource type="ArrayMesh" uid="uid://br0ngo3hwa8ru" path="res://assets/mesh/fragmentos_Crystal_Fragment_05_Mesh.res" id="6_akf7g"]
+[ext_resource type="ArrayMesh" uid="uid://dw5gl6j43lsom" path="res://assets/mesh/fragmentos_Crystal_Fragment_06_Mesh.res" id="7_cdlfd"]
+[ext_resource type="ArrayMesh" uid="uid://bpeahslrc47mo" path="res://assets/mesh/fragmentos_Crystal_Fragment_07_Mesh.res" id="8_ak0o3"]
+[ext_resource type="ArrayMesh" uid="uid://cjbpbli70l5gj" path="res://assets/mesh/fragmentos_Crystal_Fragment_08_Mesh.res" id="9_4vu1q"]
+[ext_resource type="ArrayMesh" uid="uid://bj4e8srbopbu5" path="res://assets/mesh/fragmentos_Crystal_Fragment_09_Mesh.res" id="10_f6goh"]
+[ext_resource type="ArrayMesh" uid="uid://brjctbk6iw7rm" path="res://assets/mesh/fragmentos_Crystal_Fragment_10_Mesh.res" id="11_bcxom"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n7wok"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
@@ -16,9 +20,10 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [node name="FragmentBase" type="StaticBody3D" unique_id=500132480]
 collision_layer = 2
 script = ExtResource("1_n7wok")
+mesh_variants = Array[Mesh]([ExtResource("2_rgf3h"), ExtResource("3_x8hwx"), ExtResource("4_fm3xo"), ExtResource("5_cpmib"), ExtResource("6_akf7g"), ExtResource("7_cdlfd"), ExtResource("8_ak0o3"), ExtResource("9_4vu1q"), ExtResource("10_f6goh"), ExtResource("11_bcxom")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1100412050]
-mesh = SubResource("BoxMesh_uakvs")
+mesh = ExtResource("2_rgf3h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=502111714]
 shape = SubResource("ConcavePolygonShape3D_n7wok")

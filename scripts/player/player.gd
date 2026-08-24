@@ -173,7 +173,7 @@ func _process_possessing(delta: float) -> void:
 	var rotate_input := input_provider.get_rotate_input()
 	match player_id:
 		1: possessed_fragment.rotate_x(rotate_input * rotate_speed * delta)
-		2: possessed_fragment.rotate_z(rotate_input * rotate_speed * delta)
+		2: possessed_fragment.rotate_y(rotate_input * rotate_speed * delta)
 
 	if possessed_fragment.can_translate:
 		var translate_input := input_provider.get_translate_input()
