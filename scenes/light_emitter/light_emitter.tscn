@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://dskbadhsqnk4u"]
 
+[ext_resource type="Script" uid="uid://dvn8bixndlwo2" path="res://scenes/light_emitter/light_emitter.gd" id="1_1m5vy"]
+
 [sub_resource type="PrismMesh" id="PrismMesh_7ixsb"]
 
 [node name="LightEmitter" type="Node3D" unique_id=1122609926]
+script = ExtResource("1_1m5vy")
+gizmo_length = 100.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=615098029]
 transform = Transform3D(0.7575834, 0, 0, 0, -0.0012101328, 0.45787853, 0, -1.691221, -0.00032762947, 0, 0, 0)
