@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://bcyijphb83y15"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4o5d8"]
+albedo_color = Color(0.27953216, 0.74878806, 0.24245176, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_qtau7"]
+material = SubResource("StandardMaterial3D_4o5d8")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qtau7"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
