@@ -6,7 +6,6 @@ extends Node3D
 @export_group("Visual Mesh")
 ## Arrastra los archivos de malla (.mesh / .tres) a esta lista
 @export var mesh_variants: Array[Mesh] = []
-
 ## Selecciona la variante a usar (0 a 9)
 @export var selected_variant: int = 0:
 	set(value):
@@ -18,15 +17,14 @@ extends Node3D
 	set(value):
 		can_translate = value
 		_update_range_gizmo()
-
 @export var translate_range: float = 2.0:
 	set(value):
 		translate_range = value
 		_update_range_gizmo()
-
 @export var behavior: ReflectionBehavior
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var collision_shape: CollisionShape3D = $Area3D/CollisionShape3D # ajustá la ruta si está en un hijo distinto (ej. $StaticBody3D/CollisionShape3D)
 
 var origin_position: Vector3
 var _range_gizmo: MeshInstance3D
@@ -34,32 +32,30 @@ var _range_gizmo: MeshInstance3D
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		origin_position = position
-		
+
 	_update_mesh()
 	_update_range_gizmo()
 
 # --- Lógica de actualización de malla ---
-
 func _update_mesh() -> void:
 	if not mesh_instance:
 		mesh_instance = get_node_or_null("MeshInstance3D")
-	
+	if not collision_shape:
+		collision_shape = get_node_or_null("CollisionShape3D")  # ajustá si aplica
+
 	if mesh_instance and mesh_variants.size() > selected_variant:
-		mesh_instance.mesh = mesh_variants[selected_variant]
+		var current_mesh: Mesh = mesh_variants[selected_variant]
+		mesh_instance.mesh = current_mesh
+		_update_collision(current_mesh)
 
-# --- Lógica de movimiento ---
-
-func translate_on_axis(axis_index: int, delta_amount: float) -> void:
-	if Engine.is_editor_hint():
+func _update_collision(source_mesh: Mesh) -> void:
+	if not collision_shape or not source_mesh:
 		return
-		
-	var new_val := position[axis_index] + delta_amount
-	var min_val := origin_position[axis_index] - translate_range
-	var max_val := origin_position[axis_index] + translate_range
-	position[axis_index] = clamp(new_val, min_val, max_val)
 
+	var shape: Shape3D = source_mesh.create_convex_shape()
+	collision_shape.shape = shape
+	
 # --- Gizmo de rango (solo editor, B5 paso 4) ---
-
 func _update_range_gizmo() -> void:
 	if not Engine.is_editor_hint():
 		return
@@ -78,7 +74,6 @@ func _update_range_gizmo() -> void:
 		add_child(_range_gizmo)
 		if Engine.is_editor_hint():
 			_range_gizmo.owner = null # no se guarda en la escena
-
 	_range_gizmo.visible = true
 	var mesh: ImmediateMesh = _range_gizmo.mesh
 	mesh.clear_surfaces()

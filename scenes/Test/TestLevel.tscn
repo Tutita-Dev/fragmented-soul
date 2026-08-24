@@ -58,16 +58,6 @@ player_color = Color(0.99999994, 0.0055067353, 0.7763962, 1)
 core_emission_energy = 2.0
 halo_emission_possess = 2.0
 
-[node name="FragmentBase2" parent="." unique_id=1526138773 instance=ExtResource("3_wd06p")]
-transform = Transform3D(0.507, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -17.669914, 1.5, 22.18045)
-selected_variant = 7
-can_translate = true
-
-[node name="FragmentBase3" parent="." unique_id=500132480 instance=ExtResource("3_wd06p")]
-transform = Transform3D(2.028, 0, 0, 0, 2, 0, 0, 0, 2, -17.602509, 1.5, -3.3925648)
-selected_variant = 7
-can_translate = true
-
 [node name="LightEmitter" parent="." unique_id=1122609926 instance=ExtResource("4_n4ulk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.697178, 1.7818004, 19.066929)
 
@@ -85,4 +75,5 @@ visible = false
 environment = SubResource("Environment_3e3ua")
 
 [node name="FragmentBase" parent="." unique_id=240462846 instance=ExtResource("3_wd06p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7844496, 4.459001, 19.842632)
+transform = Transform3D(0.99999994, -6.17436e-05, 0.00010235421, 6.17689e-05, 0.99999994, -0.00025237259, -0.00010233885, 0.0002523791, 0.99999994, -17.75789, 2.5361106, 12.998202)
+selected_variant = 2
